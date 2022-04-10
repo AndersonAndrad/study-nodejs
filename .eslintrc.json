@@ -2,5 +2,38 @@
   "extends": "standard-with-typescript",
   "parserOptions": {
     "project": "./tsconfig.json"
-  }
+  },
+  "rules": {
+    "semi": ["error","never"],
+    "max-len": ["warn", { "code": 120 }],
+    "eqeqeq": ["error", "always"],
+    
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-duplicate-imports": ["error", { "includeExports": true }],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+    "no-unused-labels": ["error"],
+    "no-dupe-else-if": ["error"],
+    "no-else-return": ["error"],
+    "no-lonely-if": ["error"],
+    "no-duplicate-case": ["error"],
+    "no-trailing-spaces": ["error"],
+    "no-empty-function": ["warn", { "allow": ["arrowFunctions"] }],
+    "comma-spacing": ["error", {"before": false, "after": true}],
+    "space-in-parens": ["error", "always"],
+    "semi-spacing": ["error", {"before": true, "after": true}],
+    "space-before-blocks": ["error", "always"],
+    "space-before-function-paren": ["error", "always"],
+    "sort-imports": ["error", {
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }],
+    "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": false }],
+    "@typescript-eslint/explicit-function-return-type": ["error", {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true,
+        "allowHigherOrderFunctions": true
+    }]
+}
 }
