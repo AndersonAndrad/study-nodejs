@@ -1,0 +1,7 @@
+{
+  "name": "study-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AndersonAndrad/study-nodejs.git",
+  "license": "MIT"
+}
