@@ -6,7 +6,6 @@ describe( 'SingUp controller', () => {
 
     const httpRequest = {
       body: {
-        name: 'Anderson',
         email: 'anderson',
         password: '123456',
         passwordConfirmation: '123456'
@@ -16,5 +15,6 @@ describe( 'SingUp controller', () => {
     const httpResponse = sut.handle( httpRequest )
 
     expect( httpResponse.statusCode ).toBe( 400 )
+    expect( httpResponse.body ).toEqual( new Error( 'Missing param: name' ) )
   } )
 } )
