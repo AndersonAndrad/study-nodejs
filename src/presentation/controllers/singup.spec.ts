@@ -1,8 +1,8 @@
-import { SingupController } from './singup.controller'
+import { SingUpController } from './singup.controller'
 
 describe( 'SingUp controller', () => {
   test( 'Should return 400 if no name is provied', () => {
-    const sut = new SingupController()
+    const sut = new SingUpController()
 
     const httpRequest = {
       body: {
@@ -14,12 +14,12 @@ describe( 'SingUp controller', () => {
 
     const httpResponse = sut.handle( httpRequest )
 
-    expect( httpResponse.statusCode ).toBe( 400 )
-    expect( httpResponse.body ).toEqual( new Error( 'Missing param: name' ) )
+    expect( httpResponse?.statusCode ).toBe( 400 )
+    expect( httpResponse?.body ).toEqual( new Error( 'Missing param: name' ) )
   } )
 
   test( 'Should return 400 if no name is provied', () => {
-    const sut = new SingupController()
+    const sut = new SingUpController()
 
     const httpRequest = {
       body: {
@@ -31,7 +31,7 @@ describe( 'SingUp controller', () => {
 
     const httpResponse = sut.handle( httpRequest )
 
-    expect( httpResponse.statusCode ).toBe( 400 )
-    expect( httpResponse.body ).toEqual( new Error( 'Missing param: email' ) )
+    expect( httpResponse?.statusCode ).toBe( 400 )
+    expect( httpResponse?.body ).toEqual( new Error( 'Missing param: email' ) )
   } )
 } )

@@ -32,7 +32,6 @@
         "ignoreMemberSort": false,
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
     }],
-    "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": false }],
     "@typescript-eslint/explicit-function-return-type": ["error", {
         "allowExpressions": true,
         "allowTypedFunctionExpressions": true,
