@@ -6,6 +6,7 @@
   "rules": {
     /* course rules */
     "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-for-in-array": "off",
 
     "semi": ["error","never"],
     "max-len": ["warn", { "code": 120 }],
