@@ -1,11 +1,10 @@
 import { HttpRequest, HttpResponse } from '../protocols/http.protocol'
+import { badRequest, serverError } from '../helpers/http.helper'
 
 import { Controller } from '../protocols/controllers.protocol'
 import { EmailValidator } from '../protocols/email-validator.protocol'
 import { InvalidParamError } from '../errors/invalid-param.error'
 import { MissingParamError } from '../errors/missing-param-error.error'
-import { ServerError } from '../errors/Server.error'
-import { badRequest } from '../helpers/http.helper'
 
 export class SingUpController implements Controller {
   private readonly emailValidator: EmailValidator
@@ -29,10 +28,7 @@ export class SingUpController implements Controller {
         return badRequest( new InvalidParamError( 'email' ) )
       }
     } catch ( error ) {
-      return {
-        statusCode: 500,
-        body: new ServerError()
-      }
+      return serverError()
     }
   }
 }
