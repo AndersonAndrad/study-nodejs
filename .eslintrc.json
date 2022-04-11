@@ -4,6 +4,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    /* course rules */
+    "@typescript-eslint/strict-boolean-expressions": "off",
+
     "semi": ["error","never"],
     "max-len": ["warn", { "code": 120 }],
     "eqeqeq": ["error", "always"],
