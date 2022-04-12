@@ -1,19 +1,24 @@
+import { AddAccount, AddAccountModel } from './../../domain/usercases/add-account.usercase'
 import { InvalidParamError, MissingParamError, ServerError } from '../errors'
 
+import { AccountModel } from './../../domain/models/account.model'
 import { EmailValidator } from '../protocols'
 import { SingUpController } from './singup.controller'
 
 interface SutTypes {
   sut: SingUpController
   emailValidatorStub: EmailValidator
+  addAccountStub: AddAccount
 }
 
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
-  const sut = new SingUpController( emailValidatorStub )
+  const addAccountStub = makeAddAccount()
+  const sut = new SingUpController( emailValidatorStub, addAccountStub )
   return {
     sut,
-    emailValidatorStub
+    emailValidatorStub,
+    addAccountStub
   }
 }
 
@@ -25,6 +30,23 @@ const makeEmailValidator = (): EmailValidator => {
   }
 
   return new EmailValidatorStub()
+}
+
+const makeAddAccount = (): AddAccount => {
+  class AddAccountStub implements AddAccount {
+    add ( account: AddAccountModel ): AccountModel {
+      const fakeAccount = {
+        id: 'valid_id',
+        name: 'valid_name',
+        email: 'valid_email',
+        password: 'valid_password'
+      }
+
+      return fakeAccount
+    }
+  }
+
+  return new AddAccountStub()
 }
 
 describe( 'SingUp controller', () => {
@@ -173,5 +195,28 @@ describe( 'SingUp controller', () => {
     sut.handle( httpRequest )
 
     expect( isValidSpy ).toHaveBeenCalledWith( 'anyEmailForTest@email.com' )
+  } )
+
+  test( 'Should call AddAcoount with correct values', () => {
+    const { sut, addAccountStub } = makeSut()
+
+    const addSpy = jest.spyOn( addAccountStub, 'add' )
+
+    const httpRequest = {
+      body: {
+        name: 'anderson',
+        email: 'anyEmailForTest@email.com',
+        password: '123456',
+        passwordConfirmation: '123456'
+      }
+    }
+
+    sut.handle( httpRequest )
+
+    expect( addSpy ).toHaveBeenCalledWith( {
+      name: 'anderson',
+      email: 'anyEmailForTest@email.com',
+      password: '123456'
+    } )
   } )
 } )
