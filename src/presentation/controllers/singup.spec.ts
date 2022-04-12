@@ -79,6 +79,24 @@ describe( 'SingUp controller', () => {
     expect( httpResponse?.body ).toEqual( new MissingParamError( 'password' ) )
   } )
 
+  test( 'Should return 400 if password confirmation fails', () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: {
+        name: 'anderson',
+        email: 'anderson@email.com',
+        password: '123456',
+        passwordConfirmation: '12345'
+      }
+    }
+
+    const httpResponse = sut.handle( httpRequest )
+
+    expect( httpResponse?.statusCode ).toBe( 400 )
+    expect( httpResponse?.body ).toEqual( new InvalidParamError( 'passwordConfirmation' ) )
+  } )
+
   test( 'Should return 400 if an invalid email ', () => {
     const { sut } = makeSut()
 
@@ -93,7 +111,7 @@ describe( 'SingUp controller', () => {
     const httpResponse = sut.handle( httpRequest )
 
     expect( httpResponse?.statusCode ).toBe( 400 )
-    expect( httpResponse?.body ).toEqual( new MissingParamError( 'passwordConfirmation' ) )
+    expect( httpResponse?.body ).toEqual( new MissingParamError( 'email' ) )
   } )
 
   test( 'Should return 400 if an invalid email is provied ', () => {
